@@ -6,7 +6,6 @@
 #define CP_UTF8 65001
 #endif
 //书名作者不能有空格；
-
 //结构体定义（单向链表）
 int total_book_count=0;
 typedef struct book{
@@ -42,6 +41,7 @@ book* idbook(int ID)
         {
             return temp->next;
         }
+        temp=temp->next;
     }
     return NULL;
 }
@@ -54,8 +54,7 @@ void showMenu() {
     printf("5. 显示所有图书\n");
     printf("6. 借书\n");
     printf("7. 还书\n");
-    printf("8. 统计\n");
-    printf("0. 退出\n");
+    printf("0. 保存并退出\n");
     printf("请选择: ");
 }
 void addbook(void)//或许应该加一个批量添加书的功能
@@ -68,7 +67,7 @@ void addbook(void)//或许应该加一个批量添加书的功能
         return ;
     }
     else{
-        printf("请输入：(示例：总库存 可借数量 借阅次数 书名{不能有空格} 作者{不能有空格})");
+        printf("请输入：(示例：总库存 可借数量 借阅次数 书名{不能有空格} 作者{不能有空格})\n");
     
     int ntotal,navailable,nborrowcount;
     char nname[100];
@@ -85,6 +84,7 @@ void addbook(void)//或许应该加一个批量添加书的功能
     strcpy(neww->author,nauthor);
     end->next=neww;
     end=end->next;
+    printf("添加成功\n");
     }
 
 }
@@ -102,7 +102,8 @@ void delbook(void)
             delet=t->next;
             t->next=delet->next;
             free(delet);
-            
+            total_book_count--;
+            printf("删除成功\n");
         }
     }
     return ;
@@ -132,6 +133,63 @@ void corbook(void)
         return ;
     }
 
+}
+void seekbook(void)
+{
+    printf("请输入要查询的ID\n");
+    int ID;
+    scanf("%d",&ID);
+    book*s=idbook(ID);
+    printf("ID: %d\n",s->id);
+    printf("书名: %s\n",s->name);
+    printf("作者: %s",s->author);
+    printf("总库存: %d,可借数量: %d,借阅次数: %d\n",s->total,s->available,s->borrowcount);
+    return ;
+}
+void viewbook(void)
+{
+    book*s=head;
+    if(s->next==NULL)
+    {
+        printf("当前没有书目\n");
+    }
+    while(s->next!=NULL)
+    {
+        printf("ID: %d\n",s->next->id);
+        printf("书名：%s\n",s->next->name);
+        printf("作者：%s\n",s->next->author);
+        printf("总库存：%d,可借数量：%d,借阅次数：%d\n",s->next->total,s->next->available,s->next->borrowcount);
+        s=s->next;
+    }
+    printf("已输出所有书目\n");
+}
+void borrowbook(void)
+{
+    printf("请输入书的ID\n");
+    int ID;
+    scanf("%d",&ID);
+    book*s =idbook(ID);
+    if(s->available<=0)
+    {
+        printf("借阅失败，没有库存\n");
+        return ;
+    }
+    else{
+        s->available=s->available-1;
+        s->borrowcount=s->borrowcount+1;
+        printf("借阅成功\n");
+        return ;
+    }
+}
+void retbook(void)
+{
+    printf("请输入要还的书的ID\n");
+    int ID;
+    scanf("%d",&ID);
+    book* s=idbook(ID);
+    s->available++;
+    printf("还书成功\n");
+    return ;
 }
 int main(void)
 {
@@ -184,15 +242,27 @@ int main(void)
             addbook();
             break;
         case 2:
-        delbook();
-        break;
+            delbook();
+            break;
         case 3:
-        corbook();
-        break;
-        
+            corbook();
+            break;
+        case 4:
+            seekbook();
+            break;
+        case 5:
+            viewbook();
+            break;
+        case 6:
+            borrowbook();
+            break;
+        case 7:
+            retbook();
+            break;
         default:
             break;
         }
+        showMenu();
         scanf("%d",&choice);
     }
     if(fp!=NULL)
