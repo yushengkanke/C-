@@ -32,6 +32,19 @@ void free_book_list(book* t)
         
     }
 }
+//按ID查找书
+book* idbook(int ID)
+{
+    book* temp=head;
+    while(temp->next!=NULL)
+    {
+        if(temp->next->id==ID)
+        {
+            return temp->next;
+        }
+    }
+    return NULL;
+}
 void showMenu() {
     printf("====== 图书管理系统 ======\n");
     printf("1. 添加图书\n");
@@ -72,6 +85,51 @@ void addbook(void)//或许应该加一个批量添加书的功能
     strcpy(neww->author,nauthor);
     end->next=neww;
     end=end->next;
+    }
+
+}
+void delbook(void)
+{
+    printf("请输入要删除的书的ID\n");
+    int ID;
+    scanf("%d",&ID);
+    t=head;
+    book* delet;
+    while(t->next!=NULL)
+    {
+        if(t->next->id==ID)
+        {
+            delet=t->next;
+            t->next=delet->next;
+            free(delet);
+            
+        }
+    }
+    return ;
+}
+void corbook(void)
+{
+    printf("请输入要修改的书的ID\n");
+    int id;
+    scanf("%d",&id);
+    book* s=idbook(id);
+    if(s==NULL)
+    {
+        printf("未找到该书\n");
+        return ;
+    }
+    else{
+        printf("请输入该书新的全部信息\n");
+        int ntotal,navailable,nborrowcount;
+        char nname[100];
+        char nauthor[50];
+        scanf("%d %d %d %s %s",&ntotal,&navailable,&nborrowcount,nname,nauthor);
+        strcpy(s->name,nname);
+        strcpy(s->author,nauthor);
+        s->total=ntotal;
+        s->available=navailable;
+        s->borrowcount=nborrowcount;
+        return ;
     }
 
 }
@@ -125,6 +183,12 @@ int main(void)
         case 1:
             addbook();
             break;
+        case 2:
+        delbook();
+        break;
+        case 3:
+        corbook();
+        break;
         
         default:
             break;
