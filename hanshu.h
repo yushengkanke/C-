@@ -1,10 +1,11 @@
-
+#ifndef HANSHU_H
+#define HANSHU_H
 #ifndef CP_UTF8
 #define CP_UTF8 65001
 #endif
 extern int choice;
 typedef struct book{
-    int id;             //计划自动生成（待完成）
+    int id;             //计划自动生成
     char name[100];     //书名
     char author[50];    //作者
     int total;          //总库存
@@ -23,5 +24,7 @@ void seekbook(void);
 void viewbook(void);
 void borrowbook(void);
 void retbook(void);
+void seekbookname(void);
 void kaishi(void);
 void jieshu(void);
+#endif

@@ -1,7 +1,8 @@
-#include"shengming.h"
+#include"hanshu.h"
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<conio.h>
 book* head;
 book* t;//辅助链表操作
 book* end;//指向链表最后的节点；
@@ -72,6 +73,7 @@ book* idbook(int ID)
     return NULL;
 }
 void showMenu() {
+    clrscr();
     printf("====== 图书管理系统 ======\n");
     printf("1. 添加图书\n");
     printf("2. 删除图书\n");
@@ -80,6 +82,7 @@ void showMenu() {
     printf("5. 显示所有图书\n");
     printf("6. 借书\n");
     printf("7. 还书\n");
+    printf("8. 按书名查询\n");
     printf("0. 保存并退出\n");
     printf("请选择: ");
 }
@@ -216,6 +219,24 @@ void retbook(void)
     s->available++;
     printf("还书成功\n");
     return ;
+}
+void seekbookname(void)
+{
+    book* s=head;
+    char a[100];
+    printf("请输入书名:\n");
+    scanf("%s",a);
+    while(s->next!=NULL)
+    {
+        if(strstr(s->next->name,a)!=NULL){
+            printf("ID: %d\n",s->next->id);
+            printf("书名：%s\n",s->next->name);
+            printf("作者：%s\n",s->next->author);
+            printf("总库存：%d,可借数量：%d,借阅次数：%d\n",s->next->total,s->next->available,s->next->borrowcount);
+        }
+        s=s->next;
+    }
+    printf("已完成搜索\n");
 }
 void jieshu(void)
 {
