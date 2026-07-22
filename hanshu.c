@@ -8,6 +8,12 @@ book* t;//辅助链表操作
 book* end;//指向链表最后的节点；
 int total_book_count=0;
 int choice;
+
+//clion用不了这个函数，手写一下
+void clrscr() {
+    system("cls");
+}
+
 void kaishi(void)
 {
     FILE* fp=fopen("bookdata.txt","r");

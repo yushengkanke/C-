@@ -1,4 +1,5 @@
 #include<conio.h>
+#include<stdio.h>//我用clion得包含这个头文件，不知道你vs是不是一样
 #include"hanshu.h"
 void showmenuyh()
 {
