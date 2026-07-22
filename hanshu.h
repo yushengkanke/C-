@@ -27,4 +27,5 @@ void retbook(void);
 void seekbookname(void);
 void kaishi(void);
 void jieshu(void);
+void clrscr() ; //clion用不了这个函数，手写一下
 #endif

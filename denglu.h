@@ -1,6 +1,7 @@
 #ifndef DENGLU_H
-#define DENGLU_H
-int dengluzhuangtai=0;//0为未登录,1为管理员,2为用户;
+// #define DENGLU_H
+//这里会重复定义变量
+extern int dengluzhuangtai;//0为未登录,1为管理员,2为用户;
 typedef struct glyaccount{
     char zhanghao[100];
     char mima[100];

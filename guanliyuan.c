@@ -1,5 +1,6 @@
 #include"guanliyuan.h"
 #include "hanshu.h"
+#include<stdio.h>
 void showmenugly()
 {
     

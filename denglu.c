@@ -4,6 +4,7 @@
 #include<stdlib.h>
 #include<string.h>
 #include<conio.h>
+int dengluzhuangtai=0;//防止重复定义变量报错
 void free_glyaccount_list(glyaccount* t)
 {
     
@@ -88,7 +89,7 @@ int guan_li_yuan_zhang_mi(void)
     glyaccount* t=head;
     char zh[100];
     char mm[100];
-    while(fscanf(f,"%s",zh)!=NULL)
+    while(fscanf(f,"%s",zh)!=EOF)//左右类型不对吧
     {
         fscanf(f,"%s",mm);
         glyaccount* temp=malloc(sizeof(glyaccount));
@@ -142,7 +143,7 @@ int yong_hu_zhang_mi(void)
     yhaccount* t=head;
     char zh[100];
     char mm[100];
-    while(fscanf(f,"%s",zh)!=NULL)
+    while(fscanf(f,"%s",zh)!=EOF)//左右类型不对吧
     {
         fscanf(f,"%s",mm);
         yhaccount* temp=malloc(sizeof(yhaccount));

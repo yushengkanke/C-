@@ -14,7 +14,7 @@ int main(void)
     {
         if(guan_li_yuan_zhang_mi()){
             kaishi();
-            showmanugly();
+            showmenugly();//你打错字了鱼
             scanf("%d",&choice);
             while(choice!=0)
             {
